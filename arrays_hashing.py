@@ -71,8 +71,68 @@ class Solution:
         # OR 
         # dict_nums_counter = Counter(nums)
 
-
         # OR
         # result_list = sorted(dict_nums.items(), key=lambda x:x[1], reverse=True)  # Sort dict by value, return list type -> sort whole dict -> longer
         result_list = heapq.nlargest(k, dict_nums_counter.keys(), key = dict_nums_counter.get)      # Sort k largest element in dict
         return result_list
+    
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        """
+        Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+        The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+        You must write an algorithm that runs in O(n) time and without using the division operation.
+
+        Example 1:
+
+        Input: nums = [1,2,3,4]
+        Output: [24,12,8,6]
+
+        Example 2:
+
+        Input: nums = [-1,1,0,-3,3]
+        Output: [0,0,9,0,0]
+        
+
+        Constraints:
+
+        2 <= nums.length <= 105
+        -30 <= nums[i] <= 30
+        The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+        
+
+        Follow up: Can you solve the problem in O(1) extra space complexity? (The output array does not count as extra space for space complexity analysis.)
+        """
+        # Common sense
+        # length = len(nums)
+        # mapRight = {}
+        # mapLeft = {}
+        # mapRight[length-1] = 1
+        # mapLeft[0] = 1
+        # for i in range(length):
+        #     # pdb.set_trace()
+        #     if length-i-1 not in mapRight:
+        #         mapRight[length-i-1] = mapRight[length-i]*nums[length-i]
+        #     if i not in mapLeft:
+        #         mapLeft[i] = mapLeft[i-1]*nums[i-1]
+        # result = []
+        # # pdb.set_trace()
+        # for i in range(length):
+        #     result.append(mapRight[i] * mapLeft[i])
+        # # pdb.set_trace()
+        # return result;
+        # Why did I even use hashhhh, this is crazyyyyyy. 
+        
+        length = len(nums)
+        result = [1] * length
+
+        left_product = 1
+        for i in range(length):
+            result[i] = left_product
+            left_product *= nums[i]
+            
+        right_product = 1
+        for i in reversed(range(length)):
+            result[i] *= right_product
+            right_product *= nums[i]
+        
+        return result
