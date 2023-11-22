@@ -21,6 +21,7 @@ class TestSolution(unittest.TestCase):
     def test_longestConsecutive(self):
         self.assertEqual(self.solution.longestConsecutive([100,4,200,1,3,2]), 4) 
         self.assertEqual(self.solution.longestConsecutive([0,3,7,2,5,8,4,6,0,1]), 9)
+        self.assertEqual(self.solution.longestConsecutive([], 1))
 
 if __name__ == '__main__':
     unittest.main()
