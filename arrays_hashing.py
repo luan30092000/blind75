@@ -136,3 +136,58 @@ class Solution:
             right_product *= nums[i]
         
         return result
+    
+    def encode(self, strs: List[str]) -> str:
+        """
+        Encode a list of strings to a string
+        @param: strs: a list of strings
+        @return: a single encoded string
+        """
+        pass
+
+    def decode(self, s: str) -> List[str]:
+        """
+        Decoded back to the original list of strings
+        @param: s: a single string
+        @return: original list of strings
+        """
+        pass
+
+    def longestConsecutive(self, nums: List[int]) -> int:
+        """
+        Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+
+        Example 1:
+        Input: nums = [100,4,200,1,3,2]
+        Output: 4
+        Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+
+        Example 2:
+        Input: nums = [0,3,7,2,5,8,4,6,0,1]
+        Output: 9
+
+        Constraints:
+        0 <= nums.length <= 105
+        -109 <= nums[i] <= 109
+
+        Runtime:
+        O(n) run time complexity
+        O(n) space complexity
+        """
+        length = len(nums)
+        if (length == 0 or length == 1):
+            return 0 if length == 0 else 1
+        nums_set = set(nums)
+        result = 1
+        for num in nums:
+            temp_result =1 
+            if num - 1 not in nums_set:
+                temp = num
+                while temp + 1 in nums_set:
+                    temp_result += 1 
+                    temp += 1
+                result = max(result, temp_result)
+        return result;
+            
+                
+        
