@@ -13,5 +13,10 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(self.solution.isPalindrome("aaa"), True)
         self.assertEqual(self.solution.isPalindrome("bbbb"), True)
 
+    def test_arrays_hashing(self):
+        self.assertEqual(self.solution.threeSum([0,0,0,0]), [[0,0,0]])
+        self.assertEqual(sorted(self.solution.threeSum([-1,0,1,2,-1,-4])), sorted([[-1,-1,2],[-1,0,1]]))
+        self.assertEqual(self.solution.threeSum([0,1,1]),[])
+        self.assertEqual(self.solution.threeSum([0,0,0]),[[0,0,0]])
 if __name__ == '__main__':
     unittest.main()
