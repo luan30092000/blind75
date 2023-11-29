@@ -85,28 +85,47 @@ class Solution:
         3 <= nums.length <= 3000
         -105 <= nums[i] <= 105
         """
-        nums_dict = defaultdict(lambda: 0)
-        for num in nums:
-            nums_dict[num] += 1
-        nums_len = len(nums)
-        result =  []
-        for i in range(nums_len):
-            pdb.set_trace()
-            if nums_dict[nums[i]] <= 0: continue
-            j = i + 1
-            while (j < nums_len):
-                if nums_dict[nums[j]] <= 0:
-                    j += 1
-                    continue
-                compl = 0 - (nums[i] + nums[j])
-                if compl in nums_dict:
-                    nums_dict[nums[i]] -= 1
-                    nums_dict[nums[j]] -= 1
-                    if nums_dict[compl] > 0:
-                        result.append([nums[i],nums[j],compl])
-                        nums_dict[compl] -= 1
-                j += 1
-        return result 
-            
+        # nums_dict = defaultdict(lambda: 0)
+        # for num in nums:
+        #     nums_dict[num] += 1
+        # nums_len = len(nums)
+        # result =  []
+        # for i in range(nums_len):
+        #     pdb.set_trace()
+        #     if nums_dict[nums[i]] <= 0: continue
+        #     j = i + 1
+        #     while (j < nums_len):
+        #         if nums_dict[nums[j]] <= 0:
+        #             j += 1
+        #             continue
+        #         compl = 0 - (nums[i] + nums[j])
+        #         if compl in nums_dict:
+        #             nums_dict[nums[i]] -= 1
+        #             nums_dict[nums[j]] -= 1
+        #             if nums_dict[compl] > 0:
+        #                 result.append([nums[i],nums[j],compl])
+        #                 nums_dict[compl] -= 1
+        #         j += 1
+        # return result 
 
-        
+        result = []
+        nums.sort()
+        nums_len = len(nums)
+        i = 0
+        for i, value in enumerate(nums):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            j = i + 1
+            k = nums_len - 1
+            while j < k:
+                threeSum = value + nums[j] + nums[k]
+                if threeSum == 0: 
+                    result.append([value, nums[j], nums[k]])
+                    j += 1
+                    while nums[j] == nums[j-1] and j < k:
+                        j += 1
+                elif threeSum < 0:
+                    j += 1
+                else:
+                    k -= 1
+        return result
