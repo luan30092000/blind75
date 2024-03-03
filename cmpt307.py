@@ -1,5 +1,6 @@
 import pdb
 import typing
+import math
 from pprint import pformat
 
 
@@ -31,8 +32,7 @@ class Solution:
             total: a positive int
         @return
             True if its existed a subset of S that its sum is equalled to t
-        """
-        
+        """  
         S.sort()
         S_len = len(S)
         dp = [[False for _ in range(t+1)] for _ in range(S_len+1)]
@@ -43,10 +43,21 @@ class Solution:
                 if S[i-1] <= j:             # check out of range for dp[i-1][j-S[i-1]]
                     dp[i][j] = dp[i-1][j] or dp[i-1][j-S[i-1]]
                 else:
-                    dp[i][j] = dp[i-1][j]
-                # pdb.set_trace()
-        self.printdp(dp)
+                    dp[i][j] = dp[i-1][j] 
+        return dp[S_len][t]        
 
-        return dp[S_len][t]
-    
-
+    def find_minumum_bribe(self, lower: int, upper: int, init: int, min_bribe: int) -> int:
+        total_cost = 0
+        lower_limit = lower
+        upper_limit = upper
+        mid = 84
+        # pdb.set_trace()
+        while lower_limit < upper_limit:
+            total_cost += mid
+            if mid >= min_bribe:
+                upper_limit = mid - 1
+            else:
+                lower_limit = mid + 1
+            mid = math.ceil((lower_limit + upper_limit) / 2)
+        total_cost += mid
+        return total_cost

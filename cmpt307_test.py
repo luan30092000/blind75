@@ -14,6 +14,10 @@ class TestSolution(unittest.TestCase):
 
     def test_subsetSum(self):
         self.assertEqual(self.solution.subsetSum([1,2,4],7), True)
+    
+    def test_bribery(self):
+        print(self.solution.find_minumum_bribe(20, 100, 84, 100))
+        print(self.solution.find_minumum_bribe(20, 100, 84,83))
 
 if __name__ == '__main__':
     unittest.main()

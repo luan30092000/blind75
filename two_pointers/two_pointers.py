@@ -1,9 +1,9 @@
-import pdb
 from typing import List
 from collections import defaultdict
 import re           # isPalindrome: removing non-alphanumeric characters
-class Solution:
 
+
+class Solution:
     def isPalindrome(self, s: str) -> bool:
         """
         A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, 
@@ -45,7 +45,6 @@ class Solution:
             if i == s_len - i - 1:
                 break
         return True
-    
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         """
         15. 3Sum
@@ -111,9 +110,9 @@ class Solution:
         result = []
         nums.sort()
         nums_len = len(nums)
-        i = 0
+        
         for i, value in enumerate(nums):
-            if i > 0 and nums[i] == nums[i-1]:
+            if i > 0 and nums[i] == nums[i-1]:  
                 continue
             j = i + 1
             k = nums_len - 1
@@ -129,3 +128,49 @@ class Solution:
                 else:
                     k -= 1
         return result
+    def maxArea_bruteForce(self, height: List[int]) -> int:
+        """
+        Runtime: O(n^2)
+        """
+        result_maxVolume = 0
+        for index1, height1 in enumerate(height):
+            # Use this to traverse from a specific index but keep the origin indices values
+            for index2, height2 in enumerate(height[index1:], index1):  
+                temp_volume = (index2 - index1) * min(height[index1], height[index2])
+                if result_maxVolume < temp_volume: result_maxVolume = temp_volume
+        return result_maxVolume
+    def maxArea(self, height: List[int]) -> int:
+        """
+        11. Contain with most water
+        You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+        Find two lines that together with the x-axis form a container, such that the container contains the most water.
+        Return the maximum amount of water a container can store.
+        Notice that you may not slant the container.
+
+        Example 1:
+        Input: height = [1,8,6,2,5,4,8,3,7]
+        Output: 49
+        Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
+
+        Example 2:
+        Input: height = [1,1]
+        Output: 1
+
+        Constraints:
+        n == height.length
+        2 <= n <= 105
+        0 <= height[i] <= 104
+
+        Runtime: O(n^2)
+        """
+        result = 0
+        left = 0
+        right = len(height) - 1
+        while (right > left):
+            temp = (-left + right) * min(height[right], height[left])
+            if result < temp: result = temp
+            if (height[left] < height[right]):
+                left += 1
+            else:
+                right -= 1
+        return result 

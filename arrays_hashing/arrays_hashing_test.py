@@ -1,5 +1,5 @@
 import unittest
-from a_arrays_hashing import Solution
+from arrays_hashing import Solution
 
 class TestSolution(unittest.TestCase):
     def setUp(self) -> None:
