@@ -74,22 +74,13 @@ class Solution:
 
         0 <= s.length <= 5 * 104
         s consists of English letters, digits, symbols and spaces. 
-
-        Predict runtime: O(n)
-        Algo runtime: O(n)
         """
         result = 0
-        breakpoint()
-        aSet = set()
+        aDict = {}
         temp = 0
-        for c in s:
-            if c in aSet:            
-                aSet.clear()
-                if result < temp: result = temp
-                temp = 0
-            aSet.add(c)
-            temp += 1
+        for i, c in enumerate(s):
+            if c in aDict:
+                temp = max(aDict[c], temp)
+            result = max(result, i - temp + 1)
+            aDict[c] = i + 1
         return result
-                
-
-

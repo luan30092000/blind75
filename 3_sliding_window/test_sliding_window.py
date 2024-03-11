@@ -10,9 +10,10 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(self.solution.maxProfit([7,6,4,3,1]), 0)
     
     def test_lengthOfLongestSubstring(self):
-        # self.assertEqual(self.solution.lengthOfLongestSubstring("abcabcbb"), 3)
-        # self.assertEqual(self.solution.lengthOfLongestSubstring("bbbbb"), 1)
-        # self.assertEqual(self.solution.lengthOfLongestSubstring("pwwkew"), 3)
+        self.assertEqual(self.solution.lengthOfLongestSubstring("abcabcbb"), 3)
+        self.assertEqual(self.solution.lengthOfLongestSubstring("bbbbb"), 1)
+        self.assertEqual(self.solution.lengthOfLongestSubstring("pwwkew"), 3)
         self.assertEqual(self.solution.lengthOfLongestSubstring(" "), 1)
+        self.assertEqual(self.solution.lengthOfLongestSubstring("abcdba"), 4)
 if __name__ == '__main__':
     unittest.main()
