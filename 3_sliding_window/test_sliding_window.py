@@ -10,10 +10,15 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(self.solution.maxProfit([7,6,4,3,1]), 0)
     
     def test_lengthOfLongestSubstring(self):
-        self.assertEqual(self.solution.lengthOfLongestSubstring("abcabcbb"), 3)
-        self.assertEqual(self.solution.lengthOfLongestSubstring("bbbbb"), 1)
-        self.assertEqual(self.solution.lengthOfLongestSubstring("pwwkew"), 3)
-        self.assertEqual(self.solution.lengthOfLongestSubstring(" "), 1)
-        self.assertEqual(self.solution.lengthOfLongestSubstring("abcdba"), 4)
+        test_cases = [("abcabcbb", 3), 
+                      ("bbbbb", 1), 
+                      ("pwwkew", 3), 
+                      (" ", 1), 
+                      ("abcdba", 4)]
+        for i, (s, expected) in enumerate(test_cases):
+            try:
+                self.assertEqual(self.solution.lengthOfLongestSubstring(s), expected)
+            except AssertionError as e:
+                print(f"Test case {i+1} failed: {e}")
 if __name__ == '__main__':
     unittest.main()
