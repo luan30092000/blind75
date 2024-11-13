@@ -1,5 +1,5 @@
 class Solution:
-    def findMin(self, nums: List[int]) -> int:
+    def findMin(self, nums: list[int]) -> int:
         '''
         153. Find Minimum in Rotated Sorted Array
         Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:
@@ -12,5 +12,21 @@ class Solution:
 
         You must write an algorithm that runs in O(log n) time.
         '''
+        res = nums[0]
+        l, r = 0, len(nums) - 1
+        
+        while l <= r:
+            # Shift only to the right => if shifted, right most always smaller than left most
+            if nums[r] > nums[l]:
+                return min(res, nums[l])
+            m = (l + r) // 2
+            res = min(res,nums[m])
+            if nums[m] >= nums[l]:
+                l = m + 1
+            else:
+                r = m - 1
+        return res
+
+
 
 

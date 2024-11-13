@@ -75,21 +75,15 @@ class Solution:
         0 <= s.length <= 5 * 104
         s consists of English letters, digits, symbols and spaces. 
         """
-        # Initialize variables
         result = 0
         aDict = {}
         temp = 0
 
-        # Iterate string s
-        for i, c in enumerate(s):
-            # If c already in aDict
-            if c in aDict:
-                # Get # of char before `c` in current substring -> `temp`, so we can calculate the length of this current substring
-                temp = max(aDict[c], temp)
-            # Calculate the length of current substring by minus the current location by temp value
+        for i, char in enumerate(s):
+            if char in aDict:
+                temp = max(aDict[char], temp)
             result = max(result, i - temp + 1)
-            # Assign how many character come before `c`
-            aDict[c] = i + 1
+            aDict[char] = i + 1
 
         return result 
     
@@ -119,11 +113,12 @@ class Solution:
         s consists of only uppercase English letters.
         0 <= k <= s.length
         """
-        result = 0
-        aDict = {}
         window_len = 1
         start_i = 0
         while start_i + window_len < len(s):
-            
-            
-        
+            # Check if window_len = 1 work?
+            if self.check_window(s, start_i, window_len, k):
+                result = window_len
+                window_len += 1
+            else:
+                start_i += 1
