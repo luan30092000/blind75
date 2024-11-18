@@ -27,3 +27,24 @@ class Solution:
                 else:   # max is next to min -> max and min is on the left
                     r = m - 1
         return res
+    def search(self, nums: list[int], target: int) -> int:
+        '''
+        33. Search in Rotated Sorted Array
+        '''
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            m = (l + r) // 2
+            if target == nums[m]: return m
+            # left portion of mid is sorted (aka mid belong to left portion)
+            if nums[m] >= nums[l]: # TODO: Why >= but not >
+                if nums[l] <= target <= nums[m]:
+                    r = m - 1
+                else: 
+                    l = m + 1
+        
+            else:
+                if nums[m] <= target <= nums[r]:
+                    l = m + 1
+                else:
+                    r = m - 1
+        return -1
